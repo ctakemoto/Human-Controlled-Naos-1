@@ -64,6 +64,11 @@ class fsmDisplay:
 		#Create buttons on window
 		self.draw_fsm()
 	
+		#Set up Arrow Key Bindings
+		self.root.bind('<Left>', self.arrowLEvent)
+		self.root.bind('<Right>', self.arrowREvent)
+		self.root.bind('<Up>', self.arrowUEvent)
+
 		#create event that is constantly renewed to get new data
 		self.root.after(0, self.update)
 
@@ -102,6 +107,22 @@ class fsmDisplay:
 				row_num += 1
 			col_num += 1
 	
+	def arrowREvent(self, event):
+		print "going right"
+		newState = self.shm2array("bodyRight")
+		self.gcmFSM.set_body_next_state(newState)
+
+	def arrowLEvent(self, event):
+		print "going Left"
+		newState = self.shm2array("bodyLeft")
+		self.gcmFSM.set_body_next_state(newState)
+
+	def arrowUEvent(self, event):
+		print "going Left"
+		newState = self.shm2array("bodyGotoBall")
+		self.gcmFSM.set_body_next_state(newState)
+
+
 	#Mouse event helper function
 	#event, fsm, and state can be passed into change State		  
 	def makeEventHandler(self, fsm, state):
