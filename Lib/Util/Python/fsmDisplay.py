@@ -68,6 +68,7 @@ class fsmDisplay:
 		self.root.bind('<Left>', self.arrowLEvent)
 		self.root.bind('<Right>', self.arrowREvent)
 		self.root.bind('<Up>', self.arrowUEvent)
+		self.root.bind('<Down>', self.arrowBEvent)
 
 		#create event that is constantly renewed to get new data
 		self.root.after(0, self.update)
@@ -120,6 +121,11 @@ class fsmDisplay:
 	def arrowUEvent(self, event):
 		print "going Left"
 		newState = self.shm2array("bodyGotoBall")
+		self.gcmFSM.set_body_next_state(newState)
+
+	def arrowBEvent(self, event):
+		print "Halt!"
+		newState = self.shm2array("bodyHalt")
 		self.gcmFSM.set_body_next_state(newState)
 
 
